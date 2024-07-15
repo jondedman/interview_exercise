@@ -77,6 +77,7 @@ describe('MessageData', () => {
           resolved: false,
           deleted: false,
           reactions: [],
+          tags: [],
           text: 'Hello world',
           senderId: senderId,
           conversationId: conversationId,

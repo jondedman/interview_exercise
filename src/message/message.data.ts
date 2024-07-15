@@ -12,6 +12,7 @@ import { ObjectID } from 'mongodb';
 import { createRichContent } from './utils/message.helper';
 import { MessageGroupedByConversationOutput } from '../conversation/models/messagesFilterInput';
 
+
 @Injectable()
 export class MessageData {
   constructor(
@@ -29,9 +30,11 @@ export class MessageData {
     chatMessage.conversationId = data.conversationId;
     chatMessage.created = new Date();
     chatMessage.deleted = false;
-    chatMessage.tags = data.tags;
+    chatMessage.tags = [];
 
     createRichContent(data, chatMessage);
+    console.log('chatMessage', chatMessage);
+
 
     const dbResult = await chatMessage.save();
     return chatMessageToObject(dbResult);

@@ -143,6 +143,7 @@ export class MessageLogic implements IMessageLogic {
       likes: message.likes,
       likesCount: message.likesCount,
       richContent: await this.mapRichContent(messageDto, message),
+      tags: message.tags,
       resolved: message.resolved,
       isSenderBlocked: false,
     });
@@ -313,7 +314,7 @@ export class MessageLogic implements IMessageLogic {
       paginatedChatMessages,
       blockedUserIds,
     );
-  
+
 
     return paginatedChatMessages;
   }
