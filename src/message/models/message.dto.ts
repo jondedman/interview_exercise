@@ -119,6 +119,9 @@ export class MessageDto {
 
   @Field(() => RichContentDto, { nullable: true })
   richContent?: RichContentDto;
+
+  @Field(() => [Tag], { nullable: true })
+  tags?: Tag[];
 }
 
 // TODO Min - Max on limit
@@ -179,14 +182,6 @@ export class ReactionDto {
   conversationId: ObjectID;
 }
 
-@InputType()
-export class CreateTagDto {
-  @Field(() => ObjectID)
-  conversationId: ObjectID;
-
-  @Field(() => String)
-  tags?: Tag[];
-}
 
 // implement once createTag is implemented
 // @InputType()

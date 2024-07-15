@@ -29,6 +29,7 @@ export class MessageData {
     chatMessage.conversationId = data.conversationId;
     chatMessage.created = new Date();
     chatMessage.deleted = false;
+    chatMessage.tags = data.tags;
 
     createRichContent(data, chatMessage);
 
@@ -99,7 +100,7 @@ export class MessageData {
       }
     );
     if (!updatedResult)
-      throw new Error("Either the Message could  not be found or it could not be deleted");
+      throw new Error("Either the Message could not be found or it could not be deleted");
     return updatedResult;
   }
 
