@@ -2,8 +2,12 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Permission } from './Permission.dto';
 import { Product, Context } from './ContextSchema.dto';
 
+// as an enum, further tags can be added here
 export enum TagType {
   subTopic = 'subTopic',
+  //  add more tags here
+  // mainTopic = 'mainTopic',
+  // question = 'question',
 }
 
 export class Tag {

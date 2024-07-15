@@ -182,6 +182,17 @@ export class ReactionDto {
   conversationId: ObjectID;
 }
 
+@InputType()
+export class AddTagDto {
+  @Field(() => ObjectID)
+  conversationId: ObjectID;
+
+  @Field(() => ObjectID)
+  messageId: ObjectID;
+
+  @Field(() => Tag)
+  tag: Tag;
+}
 
 // implement once createTag is implemented
 // @InputType()

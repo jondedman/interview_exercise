@@ -154,6 +154,7 @@ class MockedPermissionsService {
   }
 }
 
+// needs to be updated to include tags and then tested
 class MockMessageLogic {
   getMessage(messageId: string, authenticatedUser: IAuthenticatedUser) {
     return {

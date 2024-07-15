@@ -11,7 +11,7 @@ import { MessageDto, GetMessageDto } from './models/message.dto';
 import { ObjectID } from 'mongodb';
 import { createRichContent } from './utils/message.helper';
 import { MessageGroupedByConversationOutput } from '../conversation/models/messagesFilterInput';
-
+import { Tag, TagType } from '../conversation/models/CreateChatConversation.dto';
 
 @Injectable()
 export class MessageData {
@@ -373,9 +373,34 @@ export class MessageData {
 
     return chatMessageToObject(updatedResult);
   }
+  async addTag(messageId: ObjectID, tag: Tag): Promise<ChatMessage> {
+    try {
+      const query = { _id: messageId };
+      const updateDocument = {
+        $addToSet: { tags: tag },
+      };
+      const updatedResult = await this.chatMessageModel.findOneAndUpdate(
+        query,
+        updateDocument,
+        { new: true } // Return the updated document
+      );
+      if (!updatedResult) {
+        throw new Error('Message not found');
+      }
+      console.log('updatedResult', updatedResult);
+
+      return updatedResult;
+    } catch (error) {
+      // Handle potential errors, such as message not found or database errors
+      console.error('Error adding tag to message:', error);
+      throw error; // Rethrow or handle as needed
+    }
+  }
 }
+
+
 // add the following methods:
-// 1. adds a tag to a message
+// 1. adds a tag to a message - done
 // 2. removes a tag from a message
 // 3. updates a tag on a message
 // 4. finds messages by tag
