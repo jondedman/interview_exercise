@@ -374,3 +374,8 @@ export class MessageData {
     return chatMessageToObject(updatedResult);
   }
 }
+// add the following methods:
+// 1. adds a tag to a message
+// 2. removes a tag from a message
+// 3. updates a tag on a message
+// 4. finds messages by tag
