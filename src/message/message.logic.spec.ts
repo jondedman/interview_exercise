@@ -740,6 +740,7 @@ describe('MessageLogic', () => {
           id: senderIdTwo.toHexString(),
           firstName: 'Bob',
           accountRole: validUser.accountRole,
+          profilePhoto: undefined,
         },
         id: messageId,
         deleted: false,
@@ -756,6 +757,7 @@ describe('MessageLogic', () => {
           },
         },
         isSenderBlocked: false,
+        tags: [],
       });
 
       expect(safeguardingService.clean).toBeCalledTimes(1);
