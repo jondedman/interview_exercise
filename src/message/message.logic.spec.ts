@@ -59,7 +59,7 @@ import {
 } from '../conversation/models/lastMessage.dto';
 import { Permission } from '../conversation/models/Permission.dto';
 import { LastReadInput } from '../conversation/models/LastReadInput.dto';
-import { Tag } from '../conversation/models/CreateChatConversation.dto';
+import { Tag, TagType } from '../conversation/models/CreateChatConversation.dto';
 
 const UNAUTHORISED_USER = new ObjectId('321b1a570ff321b1a570ff01');
 const validUser: IAuthenticatedUser = {
@@ -115,6 +115,14 @@ const mockPollContentWithOptionBurgerSelected = {
     allowMultipleAnswers: false,
   },
 };
+const exampleTag1: Tag = {
+  id: '123',
+  type: TagType.subTopic,
+};
+const exampleTag2: Tag = {
+  id: '456',
+  type: TagType.subTopic,
+};
 
 const replyMessageModel: ChatMessageModel = {
   id: new ObjectID(replyMessageId),
@@ -131,6 +139,7 @@ const replyMessageModel: ChatMessageModel = {
   deleted: false,
   resolved: false,
   likes: [],
+  tags: [],
   likesCount: 0,
 };
 
@@ -161,6 +170,7 @@ describe('MessageLogic', () => {
     deleted: false,
     resolved: false,
     likes: [],
+    tags: [],
     likesCount: 0,
   };
 
@@ -192,6 +202,7 @@ describe('MessageLogic', () => {
     resolved: false,
     likes: [],
     likesCount: 0,
+    tags: [],
     richContent: {
       reply: {
         id: messageId,
@@ -337,6 +348,7 @@ describe('MessageLogic', () => {
           resolved: false,
           likes: [],
           likesCount: 0,
+          tags: [],
           isSenderBlocked: false,
         },
 
@@ -353,6 +365,7 @@ describe('MessageLogic', () => {
           resolved: false,
           likes: [],
           likesCount: 0,
+          tags: [],
           isSenderBlocked: false,
         },
       ];
@@ -382,6 +395,7 @@ describe('MessageLogic', () => {
         deleted: false,
         resolved: false,
         likes: [],
+        tags: [],
       };
     }
 
@@ -544,6 +558,9 @@ describe('MessageLogic', () => {
     isDirectConversation(contexts: ContextSchema[]): boolean {
       return false;
     }
+    addTags(conversationId: string, tags: Tag[]): Promise<ConversationDTO> {
+      throw new Error('Method not implemented.');
+    }
   }
 
   class MockConversationChannel {
@@ -631,6 +648,7 @@ describe('MessageLogic', () => {
         deleted: false,
         resolved: false,
         likes: [],
+        tags: [],
         likesCount: 0,
         isSenderBlocked: false,
       });
@@ -669,6 +687,7 @@ describe('MessageLogic', () => {
         deleted: false,
         resolved: false,
         likes: [],
+        tags: [],
         likesCount: 0,
         richContent: {
           reply: {
@@ -782,6 +801,7 @@ describe('MessageLogic', () => {
         resolved: false,
         likes: [],
         likesCount: 0,
+        tags: [],
         richContent: {
           images: mockImages,
         },
@@ -831,6 +851,7 @@ describe('MessageLogic', () => {
         resolved: false,
         likes: [],
         likesCount: 0,
+        tags: [],
         richContent: {
           attachments: mockAttachments,
         },
@@ -880,6 +901,7 @@ describe('MessageLogic', () => {
         resolved: false,
         likes: [],
         likesCount: 0,
+        tags: [],
         richContent: {
           poll: mockPoll,
         },
@@ -981,6 +1003,7 @@ describe('MessageLogic', () => {
         resolved: false,
         likes: [],
         likesCount: 0,
+        tags: [],
         richContent: {
           reply: {
             created,

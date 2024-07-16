@@ -4,7 +4,8 @@ import { UserField, MessageSender } from '../../user/models/user.model';
 import { ChatConversation } from '../../conversation/models/ChatConversation.entity';
 import { AttachmentType, GifType } from './message.dto';
 import { Reaction } from './message.model';
-import { Tag } from '../../conversation/models/CreateChatConversation.dto';
+import { MessageTag } from './message.dto';
+import { Message } from '../message';
 
 class ReplyMessageSocket {
   text?: string;
@@ -150,8 +151,8 @@ export class ChatMessage {
   @Field({ defaultValue: false, nullable: true })
   isSenderBlocked?: boolean;
 
-  @Field(() => [Tag], { nullable: true })
-  tags?: Tag[];
+  @Field(() => [MessageTag], { nullable: true })
+  tags?: MessageTag[];
 }
 
 /***
@@ -181,7 +182,7 @@ export class SocketChatMessage {
 
   isSenderBlocked?: boolean;
 
-  tags?: Tag[];
+  tags?: MessageTag[];
 }
 
 @ObjectType()

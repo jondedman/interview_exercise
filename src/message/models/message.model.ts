@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'mongodb';
 import { AttachmentType, GifType } from './message.dto';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Tag } from '../../conversation/models/CreateChatConversation.dto';
+import { MessageTag } from './message.dto';
 
 @Schema()
 export class ReplyMessage {
@@ -160,7 +160,7 @@ export class ChatMessageModel {
     required: false,
     default: [],
   })
-  tags?: Tag[];
+  tags?: MessageTag[];
 
   /**
    * All the properties below are virtual properties

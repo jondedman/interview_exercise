@@ -14,6 +14,7 @@ import { ConversationModule } from '../conversation/conversation.module';
 import { SafeguardingModule } from '../safeguarding/safeguarding.module';
 import { ChatMessageDataLoader } from './message.dataloader';
 import { UserBlocksModule } from '../user-blocks/user-blocks.module';
+import { MessageTag } from './models/message.dto';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -33,8 +34,9 @@ import { UserBlocksModule } from '../user-blocks/user-blocks.module';
     MessageData,
     ConfigService,
     ChatMessageDataLoader,
+    MessageTag,
   ],
   controllers: [],
-  exports: [MessageData, MessageLogic, ChatMessageDataLoader],
+  exports: [MessageData, MessageLogic, ChatMessageDataLoader, MessageTag],
 })
 export class MessageModule {}

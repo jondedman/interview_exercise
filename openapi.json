@@ -937,6 +937,24 @@
                 "type": "object",
                 "properties": {}
             },
+            "MessageTag": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "question"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ]
+            },
             "ChatMessage": {
                 "type": "object",
                 "properties": {
@@ -983,7 +1001,7 @@
                     "tags": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Tag"
+                            "$ref": "#/components/schemas/MessageTag"
                         }
                     }
                 },

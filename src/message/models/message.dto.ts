@@ -6,7 +6,25 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { ObjectID } from 'mongodb';
-import { Tag } from '../../conversation/models/CreateChatConversation.dto';
+
+export enum MessageTagType {
+  question = 'question',
+  // Add more tags here if needed
+  // mainTopic = 'mainTopic',
+}
+
+registerEnumType(MessageTagType, {
+  name: 'MessageTagType',
+});
+
+@ObjectType()
+export class MessageTag {
+  @Field(() => String)
+  id: string;
+
+  @Field(() => MessageTagType)
+  type: MessageTagType;
+}
 
 export enum GifType {
   Gif = 'gif',
@@ -120,8 +138,8 @@ export class MessageDto {
   @Field(() => RichContentDto, { nullable: true })
   richContent?: RichContentDto;
 
-  @Field(() => [Tag], { nullable: true })
-  tags?: Tag[];
+  @Field(() => [MessageTag], { nullable: true })
+  tags?: MessageTag[];
 }
 
 // TODO Min - Max on limit
@@ -190,8 +208,8 @@ export class AddTagDto {
   @Field(() => ObjectID)
   messageId: ObjectID;
 
-  @Field(() => Tag)
-  tag: Tag;
+  @Field(() => MessageTagType)
+  tag: MessageTagType;
 }
 
 // implement once createTag is implemented

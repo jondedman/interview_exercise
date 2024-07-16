@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ObjectID } from 'mongodb';
 import { MessageData } from './message.data';
 import { ChatMessageModel, ChatMessageSchema } from './models/message.model';
-import { Tag, TagType } from '../conversation/models/CreateChatConversation.dto';
+import { MessageTag, MessageTagType } from './models/message.dto';
 
 import { ConfigManagerModule } from '../configuration/configuration-manager.module';
 import {getTestConfiguration}  from '../configuration/configuration-manager.utils';
@@ -106,7 +106,7 @@ describe('MessageData', () => {
 
       const gotMessage = await messageData.getMessage(sentMessage.id.toHexString())
 
-      expect(gotMessage).toMatchObject(sentMessage)
+      expect(gotMessage).toMatchObject(sentMessage);
     });
   });
 
@@ -131,20 +131,28 @@ describe('MessageData', () => {
   });
 
   describe('addTag', () => {
-    it('successfully adds a tag to a message', async () => {
-      const conversationId = new ObjectID();
-      const message = await messageData.create(
-        { conversationId, text: 'Message to tag' },
-        senderId,
-      );
+  it('successfully adds a tag to a message', async () => {
+    const conversationId = new ObjectID();
+    const message = await messageData.create(
+      { conversationId, text: 'Message to tag' },
+      senderId,
+    );
 
-      const tag = new Tag();
-      tag.type = TagType.subTopic;
-      const taggedMessage = await messageData.addTag(new ObjectID(message.id), tag);
-      // Assuming tags is an array of Tag objects
-      expect(taggedMessage.tags).toEqual(expect.arrayContaining([expect.objectContaining({ id: tag.id, type: tag.type })]));
-    });
+    const tag = new MessageTag();
+    tag.type = MessageTagType.question;
+
+    // Add the tag to the message
+    const taggedMessage = await messageData.addTag(message.id, tag);
+
+    // Assuming tags is an array of MessageTag objects associated with the message
+    expect(taggedMessage.tags).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: tag.id, type: MessageTagType.question }),
+      ]),
+    );
   });
+});
+
 });
 
 // add the following tests:

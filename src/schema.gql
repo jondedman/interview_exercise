@@ -23,6 +23,15 @@ enum ContextType {
   isNewsFeedConversation
 }
 
+type MessageTag {
+  id: String!
+  type: MessageTagType!
+}
+
+enum MessageTagType {
+  question
+}
+
 type Reaction {
   reaction: String!
   reactionUnicode: String!
@@ -99,7 +108,7 @@ type ChatMessage {
   richContent: RichMessageContent
   reactions: [Reaction!]
   isSenderBlocked: Boolean
-  tags: [String!]
+  tags: [MessageTag!]
 }
 
 """
