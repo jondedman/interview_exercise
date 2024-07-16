@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Permission } from './Permission.dto';
 import { Product, Context } from './ContextSchema.dto';
+import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
+
 
 // as an enum, further tags can be added here
 export enum TagType {
@@ -10,6 +12,11 @@ export enum TagType {
   // question = 'question',
 }
 
+registerEnumType(TagType, {
+  name: 'TagType',
+});
+
+@ObjectType()
 export class Tag {
   @ApiProperty({ type: String })
   id: string;
