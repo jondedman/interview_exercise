@@ -117,6 +117,8 @@ describe('MessageData', () => {
         { conversationId, text: 'Message to delete' },
         senderId,
       );
+      console.log(message);
+
 
       // Make sure that it started off as not deleted
       expect(message.deleted).toEqual(false);

@@ -23,7 +23,14 @@ enum ContextType {
   isNewsFeedConversation
 }
 
-type Tag
+type Tag {
+  id: String!
+  type: TagType!
+}
+
+enum TagType {
+  subTopic
+}
 
 type Reaction {
   reaction: String!

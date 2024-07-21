@@ -3,7 +3,6 @@ import { Permission } from './Permission.dto';
 import { Product, Context } from './ContextSchema.dto';
 import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
 
-
 // as an enum, further tags can be added here
 export enum TagType {
   subTopic = 'subTopic',
@@ -18,9 +17,11 @@ registerEnumType(TagType, {
 
 @ObjectType()
 export class Tag {
+  @Field(() => String)
   @ApiProperty({ type: String })
   id: string;
 
+  @Field(() => TagType)
   @ApiProperty({ enum: TagType })
   type: TagType;
 }
